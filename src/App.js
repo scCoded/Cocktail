@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import Titles from "./components/Title";
-import Form from "./components/Form";
-import Cocktail from "./components/Cocktail";
-import Random from "./components/Random";
+import Titles from "./components/Title/Title";
+import Form from "./components/Form/Form";
+import Cocktail from "./components/Cocktail/Cocktail";
+import Random from "./components/Random/Random";
 document.body.style.backgroundColor = '#D7BDE2';
 
 class App extends React.Component{
@@ -21,7 +21,6 @@ class App extends React.Component{
     const process_data = await api_call.json();
     try{
       if (drink){
-        console.log(process_data);
         this.setState({
           nameOfDrink : process_data.drinks[0].strDrink,
           method : process_data.drinks[0].strInstructions,
@@ -53,7 +52,6 @@ class App extends React.Component{
     e.preventDefault();
     const api_call = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`);
     const process_data = await api_call.json();
-    console.log(process_data);
     this.setState({
           nameOfDrink : process_data.drinks[0].strDrink,
           method : process_data.drinks[0].strInstructions,

@@ -4,7 +4,7 @@ class Form extends React.Component{
         return(
             <form onSubmit={this.props.getCocktail}>
                 <input type="text" name="drink" placeholder="Drink Name..."/>
-                <button>Get Cocktail!</button>>
+                <button>Get Cocktail!</button>
             </form>
         );
     }
