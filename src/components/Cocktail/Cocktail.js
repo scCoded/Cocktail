@@ -25,6 +25,17 @@ class Cocktail extends React.Component{
     render(){
         return(
             <div class="cocktail-wrapper">
+                <div class="cocktail-wrapper-row tags">
+                    <div class="cocktail-wrapper-column1 tags">
+                        {this.props.alcoholic && <p>{this.props.alcoholic} </p>}
+                    </div>
+                    <div class="cocktail-wrapper-column1 tags">
+                        {this.props.category && <p>{this.props.category} </p>}
+                    </div>
+                    <div class="cocktail-wrapper-column1 tags">
+                        {this.props.glass && <p>{this.props.glass} </p>}
+                    </div>
+                </div>        
                 <div class="cocktail-wrapper-row">
                     <div class="cocktail-wrapper-column1">
                         {this.props.nameOfDrink && <p class="title">{this.props.nameOfDrink}</p>}
@@ -37,10 +48,8 @@ class Cocktail extends React.Component{
                         {this.props.ingredients && <p> Ingredients <br></br><span>{this.getIngredients(this.props.ingredients)}</span></p>}
                     </div>
                 </div>
-                <div>
-                    {this.props.error && <p class="error"> {this.props.error} </p>}
+                <div>      
                 </div>
-                
             </div>
         );
     }

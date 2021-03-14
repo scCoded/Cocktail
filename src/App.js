@@ -10,7 +10,10 @@ class App extends React.Component{
     nameOfDrink: undefined,
     method: undefined,
     ingredients:undefined,
-    photo: undefined, 
+    photo: undefined,
+    alcoholic: undefined,
+    category: undefined,
+    glass: undefined, 
     error: undefined
   }
   
@@ -42,6 +45,9 @@ class App extends React.Component{
             [process_data.drinks[0].strIngredient15, process_data.drinks[0].strMeasure15], 
           ],
           photo : process_data.drinks[0].strDrinkThumb,
+          alcoholic: process_data.drinks[0].strAlcoholic,
+          category: process_data.drinks[0].strCategory,
+          glass: process_data.drinks[0].strGlass, 
           error : ""
         });
       }
@@ -51,6 +57,9 @@ class App extends React.Component{
           method : undefined,
           ingredients:undefined,
           photo: undefined,
+          alcoholic: undefined,
+          category: undefined,
+          glass: undefined, 
           error : "Please enter the name of the drink..."
         });
       }
@@ -62,6 +71,9 @@ class App extends React.Component{
         method : undefined,
         ingredients:undefined,
         photo : undefined,
+        alcoholic: undefined,
+        category: undefined,
+        glass: undefined, 
         error : "The name you entered was not found..."
       });
     }
@@ -93,6 +105,9 @@ class App extends React.Component{
             [process_data.drinks[0].strIngredient14, process_data.drinks[0].strMeasure14],
             [process_data.drinks[0].strIngredient15, process_data.drinks[0].strMeasure15], 
           ],
+          alcoholic: process_data.drinks[0].strAlcoholic,
+          category: process_data.drinks[0].strCategory,
+          glass: process_data.drinks[0].strGlass, 
           photo : process_data.drinks[0].strDrinkThumb,
           error : ""
         });
@@ -122,7 +137,10 @@ class App extends React.Component{
         method={this.state.method}
         ingredients={this.state.ingredients}
         photo={this.state.photo}
-        error = {this.state.error}
+        alcoholic = {this.state.alcoholic}
+        category = {this.state.category}
+        glass= {this.state.glass}
+        error = {this.state.error}      
         />
     </div>
     );
