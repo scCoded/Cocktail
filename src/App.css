@@ -110,7 +110,7 @@ h1::after {
 
 .cocktail-wrapper-column2 {
     float: left;
-    width: 50%;
+    width: 40%;
     padding-left: 100px;
     max-height: 400px;
     scrollbar-width: none;
@@ -119,7 +119,11 @@ h1::after {
     /* Internet Explorer 10+ */
     overflow-y: scroll;
 }
-
+.cocktail-wrapper-column2.ingredients{
+    float: left;
+    width: 20%;
+    padding-left: 50px;
+}
 .cocktail-wrapper-column2::-webkit-scrollbar {
     display: none;
     /* Safari and Chrome */
