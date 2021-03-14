@@ -4,7 +4,6 @@ import Titles from "./components/Title/Title";
 import Form from "./components/Form/Form";
 import Cocktail from "./components/Cocktail/Cocktail";
 import Random from "./components/Random/Random";
-document.body.style.backgroundColor = '#D7BDE2';
 
 class App extends React.Component{
   state = {
@@ -33,7 +32,7 @@ class App extends React.Component{
           nameOfDrink : undefined,
           method : undefined,
           photo: undefined,
-          error : "Please enter name of drink..."
+          error : "Please enter the name of thedrink..."
         });
       }
       
@@ -48,10 +47,12 @@ class App extends React.Component{
     }
     
   }
+  
   getRandom = async (e) => {
     e.preventDefault();
     const api_call = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`);
     const process_data = await api_call.json();
+    console.log(process_data.drinks[0]);
     this.setState({
           nameOfDrink : process_data.drinks[0].strDrink,
           method : process_data.drinks[0].strInstructions,
@@ -60,21 +61,32 @@ class App extends React.Component{
         });
      
     }
-    
   
   render(){
     return(
       <div>
         <Titles/>
-        <Form getCocktail={this.getCocktail}/>
-        <Random getRandom={this.getRandom}/>
+        <div class="search-options-row">
+          <div class="search-options-column">
+            <p>Search Cocktail By Name:</p>
+            <Form getCocktail={this.getCocktail}/>
+          </div>
+          <div class="search-options-column">
+            <p>Search Cocktail By Ingredient:</p>
+            <button>TODO</button>
+          </div>
+          <div class="search-options-column last">
+            <p>If you're feeling spontaneous:</p>
+            <Random getRandom={this.getRandom}/>
+          </div>
+        </div>
         <Cocktail 
         nameOfDrink={this.state.nameOfDrink}
         method={this.state.method}
         photo={this.state.photo}
         error = {this.state.error}
         />
-      </div>
+    </div>
     );
   }
 }
