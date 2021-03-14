@@ -1,5 +1,6 @@
 html {
     background: linear-gradient(to bottom right, #cc99ff 25%, #6600cc 95%);
+    background-repeat: no-repeat;
     height: 100%;
     width: 100%;
 }
@@ -65,8 +66,8 @@ h1::after {
 }
 
 .cocktail-wrapper img {
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 270px;
+    max-height: 270px;
     border: peachpuff 5px dashed;
 }
 
@@ -93,7 +94,6 @@ h1::after {
     content: "";
     display: table;
     clear: both;
-    padding-top: 25px;
     width: 100%;
 }
 
@@ -108,6 +108,28 @@ h1::after {
     margin-bottom: 20px;
 }
 
+.cocktail-wrapper-row.tags {
+    content: "";
+    display: table;
+    clear: both;
+    padding-top: 5px;
+    width: 100%;
+}
+.cocktail-wrapper-row.tags p{
+    font-size: 15px;
+    text-align: center;
+    color: wheat;
+}
+
+.cocktail-wrapper-column1.tags {
+    float: right;
+    width: 13%;
+    margin-left:5px;
+    margin-right:5px;
+    border:peachpuff dashed 2px;
+    padding:0px
+}
+
 .cocktail-wrapper-column2 {
     float: left;
     width: 40%;
@@ -119,11 +141,13 @@ h1::after {
     /* Internet Explorer 10+ */
     overflow-y: scroll;
 }
+
 .cocktail-wrapper-column2.ingredients{
     float: left;
     width: 20%;
     padding-left: 50px;
 }
+
 .cocktail-wrapper-column2::-webkit-scrollbar {
     display: none;
     /* Safari and Chrome */
