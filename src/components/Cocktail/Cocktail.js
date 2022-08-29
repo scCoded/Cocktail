@@ -25,15 +25,16 @@ class Cocktail extends React.Component{
     render(){
         return(
             <div class="cocktail-wrapper">
+                {this.props.error && <p>{this.props.error}</p>}
                 <div class="cocktail-wrapper-row tags">
                     <div class="cocktail-wrapper-column1 tags">
-                        {this.props.alcoholic && <p>{this.props.alcoholic} </p>}
+                        {this.props.alcoholic && <p>{this.props.alcoholic}</p>}
                     </div>
                     <div class="cocktail-wrapper-column1 tags">
-                        {this.props.category && <p>{this.props.category} </p>}
+                        {this.props.category && <p>{this.props.category}</p>}
                     </div>
                     <div class="cocktail-wrapper-column1 tags">
-                        {this.props.glass && <p>{this.props.glass} </p>}
+                        {this.props.glass && <p>{this.props.glass}</p>}
                     </div>
                 </div>        
                 <div class="cocktail-wrapper-row">
@@ -42,10 +43,10 @@ class Cocktail extends React.Component{
                         {this.props.photo && <img class ="photo" src = {this.props.photo} border="5" align="left"/>}
                     </div>
                     <div class="cocktail-wrapper-column2">
-                        {this.props.method && <p> Instructions <br></br><span>{this.getMethod(this.props.method)}</span></p>}
+                        {this.props.method && <p>Instructions <br></br><span>{this.getMethod(this.props.method)}</span></p>}
                     </div>
                     <div class="cocktail-wrapper-column2 ingredients">
-                        {this.props.ingredients && <p> Ingredients <br></br><span>{this.getIngredients(this.props.ingredients)}</span></p>}
+                        {this.props.ingredients && <p>Ingredients <br></br><span>{this.getIngredients(this.props.ingredients)}</span></p>}
                     </div>
                 </div>
                 <div>      
