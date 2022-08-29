@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
 import Titles from "./components/Title/Title";
-import Form1 from "./components/Form/Form1";
-import Form2 from "./components/Form/Form2";
-import Cocktail from "./components/Cocktail/Cocktail";
-import Random from "./components/Random/Random";
+import DrinkForm from "./components/FormSections/DrinkForm";
+import IngredientForm from "./components/FormSections/IngredientForm";
+import CocktailBoard from "./components/CocktailBoard/CocktailBoard";
+import Random from "./components/FormSections/Random";
 
-class App extends React.Component{
+class App extends React.Component {
+
+  // state/data of current drink on the cocktail board
   state = {
     nameOfDrink: undefined,
     method: undefined,
@@ -18,7 +20,8 @@ class App extends React.Component{
     error: undefined
   }
 
-    setValidData(process_data){
+    // set data from a drink, from the normal cocktail getter api
+    setValidData(process_data) {
       this.setState({
         nameOfDrink : process_data.drinks[0].strDrink,
         method : process_data.drinks[0].strInstructions,
@@ -47,7 +50,11 @@ class App extends React.Component{
       });
     }
 
-    setError1(string){
+    getCocktailById(process_data) {
+    
+    }
+
+    setEmptyError(string) {
       this.setState({
         nameOfDrink : undefined,
         method : undefined,
@@ -60,7 +67,7 @@ class App extends React.Component{
       });
     }
 
-    setError2(string){
+    setNotFoundPropertyError(string) {
       this.setState({
         nameOfDrink : undefined,
         method : undefined,
@@ -76,44 +83,39 @@ class App extends React.Component{
     getCocktailByName = async (e) => {
       e.preventDefault();
       const drink = e.target.elements.drink.value;
-      const api_call = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`);
-      const process_data = await api_call.json();
-      console.log(process_data);
-      try{
-        if (drink){
+      if (drink) {
+        try {
+          const api_call = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`);
+          const process_data = await api_call.json();
           this.setValidData(process_data);
+        } catch(err) {
+          this.setNotFoundPropertyError('The drink name you entered was not found...');
         }
-        else{
-          this.setError1('Please enter a drink name...');
-        }
-      }
-      catch(err){
-        this.setError2('The drink name you entered was not found...');
+      } else {
+        this.setEmptyError('Please enter a drink name...');
       }
     }
     
     getCocktailByIngredient = async (e) => {
       e.preventDefault();
       const ingredient = e.target.elements.ingredient.value;
-      const api_call = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
-      const process_data = await api_call.json();
-      console.log(process_data);
-      try{
-        if (ingredient){
-            const api_call = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${process_data.drinks[0].strDrink}`);
-            const process_data = await api_call.json();
-            this.setValidData(process_data);
-            console.log(process_data);
-          }
-          else{
-            this.setError1('Please enter an ingredient...');
-          }
+      if (ingredient) {
+        try {
+        // calling drink by ingredient in ingredient form section.
+        const api_call = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+        const process_data = await api_call.json();
+        const drinkId = process_data.drinks[0].idDrink;
+        // calling drink by id found via ingredient call response.
+        const api_call2 = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`);
+        const process_data2 = await api_call2.json();
+        this.setValidData(process_data2);
+        } catch(err) {
+          this.setNotFoundPropertyError('The ingredient you entered was not found...');
         }
-        catch(err){
-          this.setError2('The ingredient you entered was not found...');
-        }
+      } else {
+        this.setEmptyError('Please enter an ingredient...');
       }
-  
+    }
     getRandom = async (e) => {
         e.preventDefault();
         const api_call = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`);
@@ -121,25 +123,25 @@ class App extends React.Component{
         this.setValidData(process_data);
       }  
   
-  render(){
+  render() {
     return(
       <div>
         <Titles/>
-        <div class="search-options-row">
-          <div class="search-options-column">
+        <div className="search-options-row">
+          <div className="search-options-column">
             <p>Search Cocktail By Name:</p>
-            <Form1 getCocktail={this.getCocktailByName}/>
+            <DrinkForm getCocktail={this.getCocktailByName}/>
           </div>
-          <div class="search-options-column">
+          <div className="search-options-column">
             <p>Search Cocktail By Ingredient:</p>
-            <Form2 getCocktail={this.getCocktailByIngredient}/>
+            <IngredientForm getCocktail={this.getCocktailByIngredient}/>
           </div>
-          <div class="search-options-column last">
+          <div className="search-options-column last">
             <p>If you're feeling spontaneous:</p>
             <Random getRandom={this.getRandom}/>
           </div>
         </div>
-        <Cocktail 
+        <CocktailBoard 
         nameOfDrink={this.state.nameOfDrink}
         method={this.state.method}
         ingredients={this.state.ingredients}

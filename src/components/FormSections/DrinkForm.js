@@ -1,6 +1,7 @@
 import React from "react";
-class Form1 extends React.Component{
-    render(){
+
+class DrinkForm extends React.Component {
+    render() {
         return(
             <form onSubmit={this.props.getCocktail}>
                 <input type="text" name="drink" placeholder="Drink Name..."/>
@@ -10,4 +11,4 @@ class Form1 extends React.Component{
     }
 }
 
-export default Form1;
+export default DrinkForm;
