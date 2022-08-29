@@ -119,14 +119,14 @@ h1::after {
     font-size: 15px;
     text-align: center;
     color: wheat;
+    border:peachpuff dashed 2px;
 }
 
 .cocktail-wrapper-column1.tags {
     float: right;
-    width: 13%;
+    width: 15%;
     margin-left:5px;
     margin-right:5px;
-    border:peachpuff dashed 2px;
     padding:0px
 }
 
